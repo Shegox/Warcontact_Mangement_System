@@ -32,7 +32,7 @@ The following thigs are needed to run it on your own:
   The EVE Appliaction need as scope contacts read and contacts write. You can find the applications here: https://developers.eveonline.com/
   Make sure that the callback url is http(s)://<domain>/php/addChar.php.
   
-2) Import the database sheme (db.sql) into your database and fill the database name and access information into to constants.php file
+2) Import the database sheme (structure.sql) into your database and fill the database name and access information into to constants.php file
 
 3) Point your webserver to the /public directory.
 
