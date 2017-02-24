@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<title></title>
+	<meta name="generator" content="LibreOffice 4.2.1.1 (Windows)">
+	<meta name="created" content="20160211;221149337000000">
+	<meta name="changed" content="20160211;222734257000000">
+	<style type="text/css">
+	<!--
+		@page { margin: 2cm }
+		p { margin-bottom: 0.25cm; line-height: 120% }
+	-->
+	</style>
+</head>
+<body lang="de-DE" dir="ltr">
+<p lang="en-US" align="center" style="margin-bottom: 0; line-height: 100%">
+<span style="color: #0066ff; "><span style="font-size: large; "><strong>War
+API Documentation</strong></span></span></p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%"><br>
+</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%">The API
+returns all wars, which ever exists and is regularly updated from the
+crest endpoint. The API provides the WarID, both the Aggressor and
+Defender Name, ID and GroupTypeID (2 = corp, 32= alliance) and an
+status ( 0=declared,1=active,2=finished).</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%"><br>
+</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%">The API
+returns 200 entries per request.</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%"><br>
+</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%">The
+following GET-Parameters you can use: 
+</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%">AgrID =
+ID of the Aggressor</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%">DefID =
+ID of the Defender</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%">ID = ID
+of the Aggressor or Defender</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%">status
+= status of the war</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%">page =
+the page of the api (starts with 1)</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%"><br>
+</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%">You can
+use AgrID and DefID or ID not both combinations at the same time</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%">You can
+add multiple value to a parameter using a &bdquo;+&ldquo;.</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%"><br>
+</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%">API-URL:
+https://www.warcontacts.tk/php/api.php</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%"><br>
+</p>
+<p lang="en-US" style="margin-bottom: 0; line-height: 100%">Example-URL:
+https://www.warcontacts.tk/php/api.php?ID=144740602&amp;status=2&amp;page=1</p>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Warcontact Management System</title>
+    <link rel="icon" href="icon.png">
+
+    <!--suppress JSUnresolvedLibraryURL -->
+    <script id="sap-ui-bootstrap" type="text/javascript"
+            src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js"
+            data-sap-ui-theme="sap_bluecrystal"
+            data-sap-ui-xx-bindingSyntax="complex"
+            data-sap-ui-libs="sap.m,sap.ui.commons"
+            data-sap-ui-resourceroots='{
+            "WMS": "./"
+        }'>
+    </script>
+    <script>
+        var date = new Date();
+        var auth;
+        var auth_code = "";
+        var image_count = 3;
+        auth_code = location.hash.replace("#access_token=", "");
+        auth_code = auth_code.replace("&token_type=Bearer&expires_in=1200", "");
+        history.pushState('', document.title, window.location.pathname);
+        console.log(auth_code);
+
+        var app = new sap.m.App({
+            homeIcon: "icon.png",
+            backgroundImage: "/img/img" + Math.floor((Math.random() * image_count ) + 1) + ".jpg"
+        });
+        var model = new sap.ui.model.json.JSONModel();
+        model.setSizeLimit(2000);
+        sap.ui.getCore().setModel(model);
+
+        app.addPage(sap.ui.jsview("logIn", "WMS.view.logIn"));
+        app.to("logIn");
+        app.placeAt("root");
+        //if (auth_code != "")
+        {
+            first_auth(auth_code);
+        }
+
+        function first_auth(auth_code) {
+            $.ajax({
+                url: "php/checkAuth.php?auth_code=" + auth_code,
+                context: this,
+                cache: false,
+                success: function handleSucess(response) {
+                    var auth_infos = JSON.parse(response);
+                    var model = new sap.ui.model.json.JSONModel();
+                    model.setJSON(response);
+                    model.setSizeLimit(1000);
+                    sap.ui.getCore().getModel().setProperty("/auth", model.getData());
+
+                    if (auth_infos["auth"] == 0) {
+                        jQuery.sap.require("sap.m.MessageBox");
+                        sap.m.MessageBox.error("Your Group is not registered. To register please contact Shegox Gabriel ingame.");
+                        app.to("page_LogIn");
+                    }
+                    if (auth_infos["auth"] == -1 && auth_code != "") {
+                        jQuery.sap.require("sap.m.MessageBox");
+                        sap.m.MessageBox.error("Your auth token is not valid. Please log in.");
+                        app.to("logIn");
+                    }
+                    if (auth_infos["auth"] >= 1) {
+                        if (app.getCurrentPage()["sId"] == "logIn") {
+                            app.addPage(sap.ui.jsview("view.launchpad", "WMS.view.launchpad"));
+                            var image_uri = "https://image.eveonline.com/Alliance/" + auth_infos["groupID"] + "_128.png";
+                            sap.ui.getCore().byId("launchpad").setFooter(new sap.m.Bar({
+                                contentLeft: sap.m.Label({text: "Copyright " + date.getFullYear() + " Shegox Gabriel"}),
+                                contentRight: [new sap.m.Label({text: "Logged in as " + auth_infos["charName"]}), new sap.m.Image({
+                                    src: image_uri,
+                                    height: "inherit"
+                                })]
+                            }));
+                            app.addPage(sap.ui.jsview("alts", "WMS.view.myAlts"));
+                            sap.ui.getCore().byId("launchpad").addContent(sap.ui.getCore().byId("alts").tile);
+                            app.addPage(sap.ui.jsview("wars", "WMS.view.myWars"));
+                            var container = new sap.m.TileContainer({
+                                tiles: [
+                                    sap.ui.getCore().byId("alts").tile,
+                                    sap.ui.getCore().byId("view.launchpad").addCharTile,
+                                    sap.ui.getCore().byId("wars").tile
+                                ]
+                            });
+                            sap.ui.getCore().byId("launchpad").addContent(container);
+                            if (auth_infos["auth"] >= 2) {
+                                app.addPage(sap.ui.jsview("group", "WMS.view.myGroup"));
+                                container.addTile(sap.ui.getCore().byId("group").tile);
+                            }
+                            app.to("view.launchpad", "flip");
+                        }
+                    }
+                    else {
+                        app.to("logIn");
+                        sap.m.MessageToast.show("Error! Please log in!");
+
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log(xhr, textStatus, errorThrown);
+                    sap.m.MessageToast.show("Crest Error: " + errorThrown);
+                }
+            });
+        }
+    </script>
+</head>
+<body class="sapUiBody" id="root">
+</body>
+</html>
