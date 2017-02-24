@@ -1,5 +1,5 @@
-# Warcontact_Mangement_System
-Tool for mangement of scout alts for highsec wars using eve sso and crest api
+# Warcontact Mangement System
+Tool for mangement of scout alts for highsec wars using EvE SSO and Crest api
 
 #Features
 - Checking of active and declared wars hourly
@@ -30,7 +30,7 @@ The following thigs are needed to run it on your own:
 # Setup
 1) Download the repository and go to the /php/examples.constants.php and rename it to constants.php. Fill in the needed information.
   The EVE Appliaction need as scope contacts read and contacts write. You can find the applications here: https://developers.eveonline.com/
-  Make sure that the callback url is http(s)://<domain>/php/addChar.php.
+  Make sure that the callback url is http(s)://&lt;domain&gt;/php/addChar.php.
   
 2) Import the database sheme (structure.sql) into your database and fill the database name and access information into to constants.php file
 
