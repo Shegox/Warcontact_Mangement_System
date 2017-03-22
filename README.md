@@ -1,7 +1,7 @@
 # Warcontact Mangement System
 Tool for mangement of scout alts for highsec wars using EvE SSO and Crest api
 
-#Features
+# Features
 - Checking of active and declared wars hourly
 
 - Adding the wartargets, including allies, automatic to your scout characters 
