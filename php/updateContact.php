@@ -18,6 +18,7 @@ function UpdateContacts($warGroup)
     echo "\n";
     $i = 1;
     foreach ($chars as $char) {
+        $hostilealts = sql_read("SELECT * FROM `hostilealts` WHERE groupID = $warGroup");
         $wars = sql_read("SELECT * FROM `allwars` WHERE (`status`=1 OR `status`=0) AND (`AgrGroupID` = $warGroup OR `DefGroupID` = $warGroup)");
         echo "Char $i {$char["characterName"]} of " . count($chars) . ". ";
         $i++;
@@ -59,13 +60,30 @@ function UpdateContacts($warGroup)
                     // delete contact, because it is not in the war list
                 }
                 // contact is not important for tool, because not withhin standing!
-            }
-        }
+            } elseif ($contact->standing == $GLOBALS["STANDING_HOSTILEALTS"])
+               //if contact is no war but a hostile alt
+                {
+                        $hostilealtKey = hostileAltSearch($contact->contact->id, $hostilealts);
+                        if($hostilealtKey != -1){
+                            $hostilealt = $hostilealts [$hostilealtKey];
+                            //curl_post_group($char ["characterID"], $auth_code, $hostilealt ["characterName"], $hostilealt ["characterID"], "Character", $GLOBALS["STANDING_HOSTILEALTS"]);
+                            //remove alt from hostilealts-list
+                             unset ($hostilealts [$hostilealtKey]);
+                        } else {
+                            curl_delete($char ["characterID"], $auth_code, $contact->contact->id);
+                        }
+                }
+                // contact is not important for tool, because not withhin standing!
+    }
         foreach ($wars as $war) {
             $group = getEnemy($war, $warGroup);
             print_r(curl_post_group($char ["characterID"], $auth_code, $group ["name"], $group ["id"], $group ["type"], $group ["standing"]));
             // addding all remaing wars
         }
+
+        foreach ($hostilealts as $hostilealt) {
+           print_r(curl_post_group($char ["characterID"], $auth_code, $hostilealt ["characterName"], $hostilealt ["characterID"], "Character", $GLOBALS["STANDING_HOSTILEALTS"]));
+        } 
         echo "Done!";
         echo "\n";
     }
@@ -111,6 +129,20 @@ function groupWarStatus($searchGroup, $wars)
         }
     }
     // war does not exist
+    return $outKey;
+}
+
+function hostileAltSearch($searchforAlt, $hostilealts)
+{
+    $outKey = -1;
+    // search in all hostile alts 
+    foreach ($hostilealts as $key => $alt) {
+        if ($alt ["characterID"] == $searchforAlt) {
+            $outKey = $key;
+            break;
+        }
+    }
+    // does not exist
     return $outKey;
 }
 

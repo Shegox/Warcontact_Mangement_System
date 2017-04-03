@@ -88,6 +88,8 @@
                             if (auth_infos["auth"] >= 2) {
                                 app.addPage(sap.ui.jsview("group", "WMS.view.myGroup"));
                                 container.addTile(sap.ui.getCore().byId("group").tile);
+								app.addPage(sap.ui.jsview("hostilealts", "WMS.view.hostilealts"));
+								container.addTile(sap.ui.getCore().byId("hostilealts").tile);
                             }
                             app.to("view.launchpad", "flip");
                         }

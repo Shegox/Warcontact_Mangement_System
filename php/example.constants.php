@@ -5,6 +5,7 @@ $SECRETKEY = "<SECRET_KEY>";
 $CALLBACKURL = "<DOMAIN_NAME>/php/addChar.php";
 
 //War Standings
+$STANDING_HOSTILEALTS = -3;
 $STANDING_DEC = -4;
 $STANDING_ACT = -9;
 
