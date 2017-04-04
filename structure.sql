@@ -79,6 +79,19 @@ CREATE TABLE IF NOT EXISTS `group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Table structure for table `hostilealts`
+--
+CREATE TABLE `hostilealts` (
+  `characterID` int(11) NOT NULL,
+  `characterName` mediumtext NOT NULL,
+  `tag` varchar(20) DEFAULT NULL,
+  `added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `addedbyCharacterID` int(11) NOT NULL,
+  `groupID` int(11) NOT NULL,
+  UNIQUE KEY `characterID_groupID` (`characterID`,`groupID`) USING BTREE
+  
+  
+--
 -- Indexes for dumped tables
 --
 
