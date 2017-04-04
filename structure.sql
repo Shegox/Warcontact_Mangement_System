@@ -85,10 +85,10 @@ CREATE TABLE `hostilealts` (
   `characterID` int(11) NOT NULL,
   `characterName` mediumtext NOT NULL,
   `tag` varchar(20) DEFAULT NULL,
-  `added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `addedbyCharacterID` int(11) NOT NULL,
   `groupID` int(11) NOT NULL,
-  UNIQUE KEY `characterID_groupID` (`characterID`,`groupID`) USING BTREE
+  UNIQUE KEY `characterID_groupID` (`characterID`,`groupID`) USING BTREE );
   
   
 --
