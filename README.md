@@ -10,6 +10,8 @@ Tool for mangement of scout alts for highsec wars using EvE SSO and Crest api
 
 - Manually remove wars, if they are not valid due to f.e. a nap
 
+- Manually add chars which are distributed to all altchars of your group (f.e. enemy scouts)
+
 # Demo
 A demo can be found here https://warcontacts.tobiasgabriel.de, if you want to test is please send send me a mail to Shegox Gabriel ingame.
 
