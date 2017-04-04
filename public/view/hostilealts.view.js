@@ -154,7 +154,7 @@ refresh: function()
         
 
         tile:new sap.m.StandardTile({
-	    icon: "sap-icon://tags",
+	    icon: "sap-icon://goal",
             title: "Hostile Alts",
             info: "Manage hostile Altchars",            
             press: function () {
