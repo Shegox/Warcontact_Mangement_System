@@ -12,9 +12,6 @@ Tool for mangement of scout alts for highsec wars using EvE SSO and Crest api
 
 - Manually add chars which are distributed to all altchars of your group (f.e. enemy scouts)
 
-# Demo
-A demo can be found here https://warcontacts.tobiasgabriel.de, if you want to test is please send send me a mail to Shegox Gabriel ingame.
-
 # Usage
 Login to the tool with EvE SSO, which allowes me to identify the selcted charcter and only that. For scout alts the access to contacts (read and write) is needed.
 
